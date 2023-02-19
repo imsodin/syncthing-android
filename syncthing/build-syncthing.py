@@ -93,6 +93,7 @@ for target in BUILD_TARGETS:
     environ.update({
         'GO111MODULE': 'on',
         'CGO_ENABLED': '1',
+        'CC': cc,
     })
 
     cc = os.path.join(
