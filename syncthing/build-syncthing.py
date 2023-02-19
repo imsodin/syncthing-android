@@ -89,6 +89,10 @@ for target in BUILD_TARGETS:
 
     print('Building syncthing for', target['arch'])
 
+    cc = os.path.join(
+        get_ndk_home(), "toolchains", "llvm", "prebuilt",
+        PLATFORM_DIRS[platform.system()], "bin",
+        target['cc'].format(min_sdk))
     environ = os.environ.copy()
     environ.update({
         'GO111MODULE': 'on',
@@ -96,10 +100,6 @@ for target in BUILD_TARGETS:
         'CC': cc,
     })
 
-    cc = os.path.join(
-        get_ndk_home(), "toolchains", "llvm", "prebuilt",
-        PLATFORM_DIRS[platform.system()], "bin",
-        target['cc'].format(min_sdk))
     subprocess.check_call(
         ['go', 'run', 'build.go', '-goos', 'android',
          '-goarch', target['goarch'], '-cc', cc,
