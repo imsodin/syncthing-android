@@ -97,7 +97,7 @@ for target in BUILD_TARGETS:
     environ.update({
         'GO111MODULE': 'on',
         'CGO_ENABLED': '1',
-        # 'GOOS': 'android',
+        'GOOS': 'android',
         'GOARCH': target['goarch'],
         'CC': cc,
     })
